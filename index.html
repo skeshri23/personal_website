@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shristi Keshri — GenAI Engineer</title>
+<meta name="description" content="Shristi Keshri — GenAI &amp; Software Engineer. RAG pipelines, agentic systems, and full-stack builds.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --maroon: #5C1A2E;
+    --maroon-deep: #3E0F1F;
+    --cream: #FDF3EA;
+    --cream-card: #FFFBF6;
+    --cherry: #C81E45;
+    --marigold: #F2A93B;
+    --marigold-deep: #D98A1F;
+    --ink: #2B1420;
+    --ink-soft: #6B4A55;
+    --tape: rgba(242,169,59,0.55);
+    --tape-pink: rgba(200,30,69,0.18);
+    --ring: #C81E45;
+    --radius: 14px;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Work Sans', -apple-system, sans-serif;
+    --mono: 'IBM Plex Mono', 'Courier New', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--cream);
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(92,26,46,0.06) 1px, transparent 0);
+    background-size: 22px 22px;
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+  :focus-visible{outline:3px solid var(--maroon); outline-offset:3px; border-radius:4px;}
+
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px;}
+
+  /* NAV */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(253,243,234,0.9);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(92,26,46,0.12);
+  }
+  .nav-inner{
+    max-width:1080px; margin:0 auto; padding:14px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px;
+  }
+  .brand{
+    font-family:var(--serif); font-weight:700; font-size:1.15rem;
+    letter-spacing:0.02em; text-decoration:none; color:var(--maroon-deep);
+  }
+  .brand span{color:var(--cherry);}
+  nav.links{display:flex; gap:22px; flex-wrap:wrap;}
+  nav.links a{
+    font-family:var(--mono); font-size:0.78rem; text-transform:uppercase;
+    letter-spacing:0.06em; text-decoration:none; color:var(--ink-soft);
+    padding:6px 2px; border-bottom:2px solid transparent; transition:border-color .2s, color .2s;
+  }
+  nav.links a:hover{color:var(--cherry); border-color:var(--marigold);}
+
+  /* HERO */
+  .hero{padding:76px 0 56px; position:relative; overflow:hidden;}
+  .doodle{position:absolute; opacity:0.9; pointer-events:none;}
+  .doodle.star1{top:18px; right:12%; width:34px; animation:spin-slow 9s linear infinite;}
+  .doodle.squiggle{bottom:6px; left:2%; width:90px; animation:float-y 4s ease-in-out infinite;}
+  .doodle.star2{top:60%; right:2%; width:22px; animation:float-y 3.2s ease-in-out infinite reverse;}
+  @keyframes float-y{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+  @keyframes spin-slow{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+  @keyframes wiggle{0%,100%{transform:rotate(0deg);}25%{transform:rotate(-4deg);}75%{transform:rotate(4deg);}}
+  .hero-tag{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--mono); font-size:0.78rem; letter-spacing:0.04em;
+    background:var(--cream-card); border:1.5px dashed var(--marigold-deep);
+    color:var(--maroon); padding:6px 14px; border-radius:999px;
+    transform:rotate(-1.5deg); margin-bottom:22px;
+  }
+  .hero-tag::before{content:"●"; color:var(--cherry); font-size:0.6rem;}
+  h1.hero-title{
+    font-family:var(--serif); font-weight:600; font-style:italic;
+    font-size:clamp(2.4rem, 6vw, 4.2rem); line-height:1.04; margin:0 0 22px;
+    color:var(--maroon-deep); max-width:14ch;
+  }
+  h1.hero-title em{
+    font-style:normal; font-weight:700; color:var(--cherry);
+    background:linear-gradient(180deg, transparent 62%, var(--tape) 62%);
+  }
+  .hero-sub{
+    font-size:1.08rem; max-width:52ch; color:var(--ink-soft); margin-bottom:32px;
+  }
+  .hero-cta{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:44px;}
+  .btn{
+    font-family:var(--mono); font-size:0.85rem; letter-spacing:0.02em;
+    padding:12px 22px; border-radius:10px; text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px; transition:transform .15s ease, box-shadow .15s ease;
+    border:2px solid var(--maroon-deep);
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-solid{background:var(--maroon-deep); color:var(--cream);}
+  .btn-solid:hover{box-shadow:4px 4px 0 var(--marigold);}
+  .btn-outline{background:transparent; color:var(--maroon-deep);}
+  .btn-outline:hover{box-shadow:4px 4px 0 var(--cherry);}
+
+  .hero-chips{display:flex; flex-wrap:wrap; gap:10px;}
+  .chip{
+    font-family:var(--mono); font-size:0.72rem; padding:6px 12px;
+    background:var(--cream-card); border:1px solid rgba(92,26,46,0.18);
+    border-radius:8px; color:var(--ink-soft); transition:transform .2s, color .2s, border-color .2s;
+  }
+  .chip:hover{color:var(--cherry); border-color:var(--marigold); animation:wiggle .35s ease;}
+
+  /* section headers - eyebrow + title */
+  .eyebrow{
+    font-family:var(--mono); font-size:0.78rem; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--cherry); margin:0 0 8px;
+  }
+  .section-title{
+    font-family:var(--serif); font-weight:600; font-size:clamp(1.8rem,3.4vw,2.6rem);
+    color:var(--maroon-deep); margin:0 0 36px;
+  }
+  section{padding:64px 0;}
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns: 1.1fr 0.9fr; gap:48px; align-items:start;}
+  @media (max-width:820px){ .about-grid{grid-template-columns:1fr;} }
+  .about-text p{margin:0 0 16px; color:var(--ink-soft); font-size:1.02rem;}
+  .about-text strong{color:var(--ink); font-weight:600;}
+
+  .postcard{
+    background:var(--cream-card);
+    border:1.5px solid rgba(92,26,46,0.15);
+    border-radius:var(--radius);
+    padding:26px;
+    transform:rotate(1.2deg);
+    box-shadow:8px 10px 0 rgba(92,26,46,0.08);
+    position:relative;
+  }
+  .postcard::before{
+    content:"";
+    position:absolute; top:-10px; left:28px; width:52px; height:20px;
+    background:var(--tape); border-radius:2px; transform:rotate(-4deg);
+  }
+  .postcard h3{font-family:var(--serif); color:var(--maroon-deep); margin:0 0 14px; font-size:1.2rem;}
+  .stat-row{display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px dashed rgba(92,26,46,0.2); font-size:0.92rem;}
+  .stat-row:last-child{border-bottom:none;}
+  .stat-row span:first-child{color:var(--ink-soft);}
+  .stat-row span:last-child{font-family:var(--mono); color:var(--cherry); font-weight:500;}
+
+  /* PROJECTS - pinboard */
+  .board{
+    background:linear-gradient(180deg, rgba(92,26,46,0.05), rgba(92,26,46,0.02));
+    border:2px solid rgba(92,26,46,0.1);
+    border-radius:20px;
+    padding:40px;
+  }
+  @media (max-width:600px){ .board{padding:24px 16px;} }
+  .pin-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:26px;}
+  @media (max-width:820px){ .pin-grid{grid-template-columns:1fr;} }
+  .pin-col{display:flex; flex-direction:column; gap:26px;}
+
+  .card{
+    background:var(--cream-card);
+    border-radius:var(--radius);
+    padding:28px;
+    position:relative;
+    border:1px solid rgba(92,26,46,0.12);
+    box-shadow:6px 8px 0 rgba(92,26,46,0.09);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .card:hover{transform:rotate(0deg) translateY(-4px); box-shadow:8px 12px 0 rgba(200,30,69,0.18);}
+  .card.flagship{transform:rotate(-1.4deg);}
+  .card.flagship:hover{transform:translateY(-4px);}
+  .card.tilt-r{transform:rotate(1.1deg);}
+  .card.tilt-r:hover{transform:translateY(-4px);}
+  .card.tilt-l{transform:rotate(-1.1deg);}
+  .card.tilt-l:hover{transform:translateY(-4px);}
+
+  .pin{
+    position:absolute; top:-13px; left:50%; transform:translateX(-50%);
+    width:22px; height:22px; border-radius:50%;
+    background:radial-gradient(circle at 32% 32%, #ff7a8a, var(--cherry) 60%, var(--maroon-deep) 100%);
+    box-shadow:0 3px 4px rgba(0,0,0,0.25); transform-origin:top center;
+  }
+  .card:hover .pin{animation:wiggle .4s ease;}
+  .card-kicker{font-family:var(--mono); font-size:0.72rem; letter-spacing:0.05em; color:var(--marigold-deep); text-transform:uppercase; margin-bottom:6px;}
+  .card h3{font-family:var(--serif); font-size:1.4rem; color:var(--maroon-deep); margin:0 0 10px;}
+  .card p{color:var(--ink-soft); font-size:0.95rem; margin:0 0 16px;}
+  .tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;}
+  .tag{
+    font-family:var(--mono); font-size:0.7rem; padding:4px 10px;
+    background:var(--tape-pink); color:var(--maroon-deep); border-radius:5px;
+    border:1px solid rgba(200,30,69,0.25);
+  }
+  .card-link{
+    font-family:var(--mono); font-size:0.82rem; color:var(--cherry);
+    text-decoration:none; border-bottom:1.5px solid var(--marigold);
+    padding-bottom:1px;
+  }
+  .card-link:hover{color:var(--maroon-deep);}
+
+  /* EXPERIENCE TIMELINE */
+  .timeline{position:relative; padding-left:28px; border-left:2px dashed rgba(92,26,46,0.25);}
+  .t-item{position:relative; padding-bottom:36px;}
+  .t-item:last-child{padding-bottom:0;}
+  .t-item::before{
+    content:""; position:absolute; left:-35px; top:4px;
+    width:14px; height:14px; border-radius:50%;
+    background:var(--marigold); border:3px solid var(--cream);
+    box-shadow:0 0 0 2px var(--cherry);
+  }
+  .t-when{font-family:var(--mono); font-size:0.76rem; color:var(--cherry); margin-bottom:4px; letter-spacing:0.03em;}
+  .t-role{font-family:var(--serif); font-size:1.2rem; color:var(--maroon-deep); margin:0 0 6px; font-weight:600;}
+  .t-desc{color:var(--ink-soft); font-size:0.95rem; max-width:60ch;}
+
+  /* SKILLS */
+  .skills-grid{display:grid; grid-template-columns:repeat(2, 1fr); gap:22px;}
+  @media (max-width:700px){ .skills-grid{grid-template-columns:1fr;} }
+  .skill-card{
+    background:var(--cream-card); border:1px solid rgba(92,26,46,0.14);
+    border-radius:var(--radius); padding:22px;
+  }
+  .skill-card h4{
+    font-family:var(--serif); color:var(--maroon-deep); margin:0 0 14px;
+    font-size:1.05rem; font-weight:600;
+  }
+
+  /* AWARDS */
+  .awards-grid{grid-template-columns:repeat(2, 1fr); margin-top:6px;}
+  @media (max-width:700px){ .awards-grid{grid-template-columns:1fr;} }
+  .awards-grid .card p{margin:0; font-size:0.9rem;}
+  .awards-grid .card h3{font-size:1.15rem;}
+
+  /* CONTACT */
+  .contact-card{
+    background:var(--maroon-deep); color:var(--cream);
+    border-radius:22px; padding:56px 40px; text-align:center;
+    position:relative; overflow:hidden;
+  }
+  .contact-card::after{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(circle at 85% 20%, rgba(242,169,59,0.25), transparent 55%);
+  }
+  .contact-card h2{font-family:var(--serif); font-style:italic; font-size:clamp(1.8rem,4vw,2.6rem); margin:0 0 14px; position:relative;}
+  .contact-card p{color:#E9C9CF; max-width:48ch; margin:0 auto 30px; position:relative;}
+  .contact-actions{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; position:relative;}
+  .contact-card .btn-solid{background:var(--marigold); border-color:var(--marigold); color:var(--maroon-deep);}
+  .contact-card .btn-solid:hover{box-shadow:4px 4px 0 var(--cherry);}
+  .contact-card .btn-outline{border-color:var(--cream); color:var(--cream);}
+  .contact-card .btn-outline:hover{box-shadow:4px 4px 0 var(--marigold);}
+
+  footer.site-footer{
+    text-align:center; padding:28px 24px; font-family:var(--mono);
+    font-size:0.75rem; color:var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">Shristi<span>.</span></a>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#awards">Awards</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="hero" id="top">
+      <svg class="doodle star1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 1l2.6 7.2L22 11l-7.4 2.8L12 21l-2.6-7.2L2 11l7.4-2.8L12 1z" fill="#F2A93B"/></svg>
+      <svg class="doodle squiggle" viewBox="0 0 100 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 15C10 2 18 2 26 15C34 28 42 28 50 15C58 2 66 2 74 15C82 28 90 28 98 15" stroke="#C81E45" stroke-width="3" stroke-linecap="round"/></svg>
+      <svg class="doodle star2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 1l2.6 7.2L22 11l-7.4 2.8L12 21l-2.6-7.2L2 11l7.4-2.8L12 1z" fill="#C81E45"/></svg>
+      <span class="hero-tag">fueled by chai &amp; stack traces</span>
+      <h1 class="hero-title">Shristi Keshri —<br><em>GenAI</em> &amp; software engineer.</h1>
+      <p class="hero-sub">I build the systems underneath the AI products people notice — RAG pipelines, agentic workflows, and evaluation harnesses, wrapped in interfaces people actually enjoy using.</p>
+      <div class="hero-cta">
+        <a class="btn btn-solid" href="#work">See the work →</a>
+        <a class="btn btn-outline" href="ShristiKeshri_Resume.pdf" download>Download résumé</a>
+      </div>
+      <div class="hero-chips">
+        <span class="chip">Python · Flask</span>
+        <span class="chip">RAG / Agentic AI</span>
+        <span class="chip">LLM Fine-tuning</span>
+        <span class="chip">Full-stack</span>
+        <span class="chip">Based in Kolkata 🇮🇳</span>
+      </div>
+    </section>
+
+    <section id="about">
+      <p class="eyebrow">01 — about</p>
+      <h2 class="section-title">A little context.</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>I graduated from <strong>The Ohio State University</strong> with a degree in Computer Science &amp; Engineering — AI specialization, Math minor — in May 2025. This past summer I was a <strong>GenAI intern at Matellio Inc.</strong> in Kolkata, building RAG pipelines, agentic AI systems, and running LLM evaluation and fine-tuning work.</p>
+          <p>I like projects that force me to go from "hackathon script" to "actually works in production" — benchmarks, edge cases, the unglamorous 80% included. Bonus points if there's a good UI at the end of it.</p>
+          <p>Currently: open to what's next, and always down to talk shop about RAG systems, agents, or whatever's breaking in someone's LLM pipeline this week.</p>
+        </div>
+        <div class="postcard">
+          <h3>Quick facts</h3>
+          <div class="stat-row"><span>Based in</span><span>Kolkata, IN</span></div>
+          <div class="stat-row"><span>Last internship</span><span>Matellio, May–Jul '26</span></div>
+          <div class="stat-row"><span>Focus</span><span>RAG · Agents · Eval</span></div>
+          <div class="stat-row"><span>Debugging fuel</span><span>chai ☕</span></div>
+          <div class="stat-row"><span>Looking for</span><span>SWE / AI roles</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work">
+      <p class="eyebrow">02 — selected work</p>
+      <h2 class="section-title">Things I've built.</h2>
+      <div class="board">
+        <div class="pin-grid">
+          <div class="card flagship">
+            <div class="pin"></div>
+            <p class="card-kicker">Flagship project</p>
+            <h3>BioKey</h3>
+            <p>A real-time iris biometric authentication system — OpenCV + MediaPipe FaceLandmarker for feature extraction, similarity-threshold enrollment &amp; verification, optimized to ~15ms per scan on CPU-only hardware. Productionized as a Flask REST API and deployed on Hugging Face Spaces.</p>
+            <div class="tags">
+              <span class="tag">OpenCV</span>
+              <span class="tag">MediaPipe</span>
+              <span class="tag">Flask</span>
+              <span class="tag">Hugging Face Spaces</span>
+            </div>
+            <a class="card-link" href="#contact">Ask me about the benchmarks →</a>
+          </div>
+          <div class="pin-col">
+            <div class="card tilt-r">
+              <div class="pin"></div>
+              <p class="card-kicker">Project</p>
+              <h3>HireHub</h3>
+              <p>An AI-powered resume analyzer. Owned the frontend as one of two engineers — React + React Router across landing, dashboard, and workspace, auth and resume CRUD wired into a FastAPI backend, AI feedback surfaced through the workspace UI. Paused mid-build with the core architecture in place.</p>
+              <div class="tags">
+                <span class="tag">React</span>
+                <span class="tag">FastAPI</span>
+                <span class="tag">Axios</span>
+              </div>
+              <a class="card-link" href="#contact">View repo →</a>
+            </div>
+            <div class="card tilt-l">
+              <div class="pin"></div>
+              <p class="card-kicker">Hackathon — 2nd place</p>
+              <h3>Safe Sound</h3>
+              <p>Built at MAKE OHI/O's AEP Challenge. A real-time multi-modal alert pipeline fusing YOLOv8 image detection with audio classification — fusion logic cut false positives by 35%, hit 92% event detection accuracy at sub-150ms latency per frame.</p>
+              <div class="tags">
+                <span class="tag">YOLOv8</span>
+                <span class="tag">Audio ML</span>
+              </div>
+              <a class="card-link" href="#contact">View repo →</a>
+            </div>
+            <div class="card tilt-r">
+              <div class="pin"></div>
+              <p class="card-kicker">Hackathon — 2nd place</p>
+              <h3>Park Assist</h3>
+              <p>Built at MAKE OHI/O's Honda Challenge, taking 2nd place out of the competing teams.</p>
+              <div class="tags"><span class="tag">Hackathon</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <p class="eyebrow">03 — path so far</p>
+      <h2 class="section-title">Where I've been.</h2>
+      <div class="timeline">
+        <div class="t-item">
+          <div class="t-when">May 2026 — Jul 2026</div>
+          <div class="t-role">GenAI Intern, Matellio Inc. — Kolkata</div>
+          <div class="t-desc">Built a hybrid BM25+FAISS retrieval pipeline with cross-encoder reranking (Precision@3 of 0.80, MRR of 0.82); shipped tool-calling LangChain agents behind a FastAPI inference server with a 16-test validation suite; benchmarked Llama 3.1-8B, Llama 3.3-70B, and Phi-3 on latency, quality, and cost.</div>
+        </div>
+        <div class="t-item">
+          <div class="t-when">May 2024 — Nov 2024</div>
+          <div class="t-role">Web Development Intern, PATH Pod — Columbus, OH</div>
+          <div class="t-desc">Primary engineer on site performance and reliability. Improved frontend performance by 40% through asset compression, lazy loading, and JS optimization; resolved cross-browser compatibility issues.</div>
+        </div>
+        <div class="t-item">
+          <div class="t-when">May 2023 — Aug 2023</div>
+          <div class="t-role">Undergraduate Teaching Assistant, OSU Dept. of CS&amp;E</div>
+          <div class="t-desc">Mentored 50+ students through core Java concepts in weekly labs, with hands-on debugging guidance.</div>
+        </div>
+        <div class="t-item">
+          <div class="t-when">Aug 2021 — May 2025</div>
+          <div class="t-role">Student Manager, Campus Grinds (OSU Dining)</div>
+          <div class="t-desc">Promoted twice over 4 years — Barista → Student Lead → Student Manager. Led teams across 10 cafés, trained 200+ student employees, owned scheduling, inventory, and food-donation logistics. Named Student Manager of the Year 2024.</div>
+        </div>
+        <div class="t-item">
+          <div class="t-when">Graduated May 2025</div>
+          <div class="t-role">B.S. Computer Science &amp; Engineering, The Ohio State University</div>
+          <div class="t-desc">Specialization: Artificial Intelligence. Minor: Mathematics. Coursework: Data Mining, Machine Learning, Intro to AI, Statistics, Algorithms, Data Structures.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <p class="eyebrow">04 — toolbox</p>
+      <h2 class="section-title">What I build with.</h2>
+      <div class="board">
+        <div class="skills-grid">
+          <div class="skill-card">
+            <h4>AI / ML</h4>
+            <div class="tags">
+              <span class="tag">LangChain</span><span class="tag">Groq API</span><span class="tag">BM25 + FAISS</span>
+              <span class="tag">Cross-encoder reranking</span><span class="tag">LoRA / PEFT</span><span class="tag">YOLOv8</span>
+              <span class="tag">OpenCV</span><span class="tag">MediaPipe</span><span class="tag">Scikit-learn</span>
+            </div>
+          </div>
+          <div class="skill-card">
+            <h4>Web &amp; Backend</h4>
+            <div class="tags">
+              <span class="tag">React</span><span class="tag">React Router</span><span class="tag">Axios</span>
+              <span class="tag">FastAPI</span><span class="tag">Flask</span><span class="tag">Pydantic</span><span class="tag">Node.js</span><span class="tag">REST APIs</span>
+            </div>
+          </div>
+          <div class="skill-card">
+            <h4>Languages</h4>
+            <div class="tags">
+              <span class="tag">Python</span><span class="tag">Java</span><span class="tag">C</span><span class="tag">C++</span>
+              <span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">SQL</span>
+            </div>
+          </div>
+          <div class="skill-card">
+            <h4>Data &amp; Systems</h4>
+            <div class="tags">
+              <span class="tag">NumPy</span><span class="tag">Pandas</span><span class="tag">ChromaDB</span><span class="tag">Supabase</span>
+              <span class="tag">Git/GitHub</span><span class="tag">Docker</span><span class="tag">Hugging Face Spaces</span><span class="tag">Google Colab</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="awards">
+      <p class="eyebrow">05 — accolades</p>
+      <h2 class="section-title">Nice things that happened.</h2>
+      <div class="pin-grid awards-grid">
+        <div class="card tilt-l">
+          <div class="pin"></div>
+          <p class="card-kicker">Award</p>
+          <h3>Judges' Choice Award</h3>
+          <p>ASA DataFest</p>
+        </div>
+        <div class="card tilt-r">
+          <div class="pin"></div>
+          <p class="card-kicker">Award</p>
+          <h3>Student Manager of the Year 2024</h3>
+          <p>OSU Dining Services</p>
+        </div>
+        <div class="card tilt-l">
+          <div class="pin"></div>
+          <p class="card-kicker">Certification</p>
+          <h3>IBM SkillsBuild</h3>
+          <p>Code Generation and Code Optimization using IBM Granite — Nov 2025</p>
+        </div>
+        <div class="card tilt-r">
+          <div class="pin"></div>
+          <p class="card-kicker">Certification</p>
+          <h3>Coursera, University of Michigan</h3>
+          <p>Getting Started with Python — Jun 2021</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="contact-card">
+        <h2>Let's build something.</h2>
+        <p>Open to SWE and AI engineering roles — always happy to talk about RAG systems, agents, or the next thing I'm building.</p>
+        <div class="contact-actions">
+          <a class="btn btn-solid" href="mailto:shristikeshri2110@gmail.com">Email me</a>
+          <a class="btn btn-outline" href="https://github.com/skeshri23" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="btn btn-outline" href="https://linkedin.com/in/shristikeshri2110" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">Designed &amp; hand-coded by Shristi Keshri · no template was harmed in the making of this site · 2026</footer>
+
+</body>
+</html>
