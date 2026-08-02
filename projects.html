@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Shristi Keshri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">Shristi<span>.</span></a>
+    <nav class="links">
+      <a href="index.html">About</a>
+      <a href="projects.html" class="active">Projects</a>
+      <a href="experience.html">Experience</a>
+      <a href="skills.html">Skills</a>
+      <a href="awards.html">Awards</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="page-hero">
+      <p class="eyebrow">selected work</p>
+      <h1 class="page-title">Things I've built.</h1>
+      <p class="page-sub">From hackathon prototypes to production APIs — the projects that taught me the most.</p>
+    </section>
+
+    <section>
+      <div class="board">
+        <div class="pin-grid">
+          <div class="card flagship">
+            <div class="pin"></div>
+            <p class="card-kicker">Flagship project</p>
+            <h3>BioKey</h3>
+            <p>A real-time iris biometric authentication system — OpenCV + MediaPipe FaceLandmarker for feature extraction, similarity-threshold enrollment &amp; verification, optimized to ~15ms per scan on CPU-only hardware. Productionized as a Flask REST API and deployed on Hugging Face Spaces.</p>
+            <div class="tags">
+              <span class="tag">OpenCV</span>
+              <span class="tag">MediaPipe</span>
+              <span class="tag">Flask</span>
+              <span class="tag">Hugging Face Spaces</span>
+            </div>
+            <a class="card-link" href="index.html#contact">Ask me about the benchmarks →</a>
+          </div>
+          <div class="pin-col">
+            <div class="card tilt-r">
+              <div class="pin"></div>
+              <p class="card-kicker">Project</p>
+              <h3>HireHub</h3>
+              <p>An AI-powered resume analyzer. Owned the frontend as one of two engineers — React + React Router across landing, dashboard, and workspace, auth and resume CRUD wired into a FastAPI backend, AI feedback surfaced through the workspace UI. Paused mid-build with the core architecture in place.</p>
+              <div class="tags">
+                <span class="tag">React</span>
+                <span class="tag">FastAPI</span>
+                <span class="tag">Axios</span>
+              </div>
+              <a class="card-link" href="index.html#contact">View repo →</a>
+            </div>
+            <div class="card tilt-l">
+              <div class="pin"></div>
+              <p class="card-kicker">Hackathon — 2nd place</p>
+              <h3>Safe Sound</h3>
+              <p>Built at MAKE OHI/O's AEP Challenge. A real-time multi-modal alert pipeline fusing YOLOv8 image detection with audio classification — fusion logic cut false positives by 35%, hit 92% event detection accuracy at sub-150ms latency per frame.</p>
+              <div class="tags">
+                <span class="tag">YOLOv8</span>
+                <span class="tag">Audio ML</span>
+              </div>
+              <a class="card-link" href="index.html#contact">View repo →</a>
+            </div>
+            <div class="card tilt-r">
+              <div class="pin"></div>
+              <p class="card-kicker">Hackathon — 2nd place</p>
+              <h3>Park Assist</h3>
+              <p>Built at MAKE OHI/O's Honda Challenge, taking 2nd place out of the competing teams.</p>
+              <div class="tags"><span class="tag">Hackathon</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">© 2026 Shristi Keshri</footer>
+
+</body>
+</html>
